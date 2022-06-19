@@ -49,7 +49,7 @@
 					{:else if cell === 'CATUS'}
 						<div id="CATUS-{indexCell * indexRow}" class="w-full rounded-md h-full bg-green-800" />
 					{:else if cell === 'SKY'}
-						<div id="PLAYER-{indexCell * indexRow}" class="w-full rounded-md h-full bg-blue-300" />
+						<div id="PLAYER-{indexCell * indexRow}" class="w-full rounded-md h-full bg-blue-400" />
 					{/if}
 				</div>
 			{/each}
