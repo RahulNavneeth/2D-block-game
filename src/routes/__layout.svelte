@@ -3,7 +3,6 @@
 	import { grid } from '$lib/store/grid';
 	import '../app.css';
 
-	$BLOCK_SIZE = 60;
 	$GRID_WIDTH = Math.ceil(window.innerWidth / $BLOCK_SIZE);
 	$GRID_HEIGHT = Math.floor(window.innerHeight / $BLOCK_SIZE);
 
