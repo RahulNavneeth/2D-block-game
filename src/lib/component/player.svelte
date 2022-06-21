@@ -40,7 +40,7 @@
 					if ($grid[PLAYER_GRID_INDEX[0] + 1][PLAYER_GRID_INDEX[1]] === 'SKY') {
 						PLAYER_CELL[0] += $BLOCK_SIZE;
 					}
-				}, 1000);
+				}, 500);
 				break;
 		}
 	}}
