@@ -3,10 +3,17 @@
 
 	import { grid } from '../store/grid';
 
-	let COLOR: 'white' | 'red' = 'white';
-
 	let PLAYER_CELL: number[] = [0, 0];
-	$: PLAYER_GRID_INDEX = [PLAYER_CELL[0] / $BLOCK_SIZE, PLAYER_CELL[1] / $BLOCK_SIZE];
+	$: PLAYER_GRID_INDEX =
+		[PLAYER_CELL[0] / $BLOCK_SIZE, PLAYER_CELL[1] / $BLOCK_SIZE] === undefined
+			? [0, 0]
+			: [PLAYER_CELL[0] / $BLOCK_SIZE, PLAYER_CELL[1] / $BLOCK_SIZE];
+
+	setInterval(() => {
+		if ($grid[PLAYER_GRID_INDEX[0] + 1][PLAYER_GRID_INDEX[1]] === 'SKY') {
+			PLAYER_CELL[0] += $BLOCK_SIZE;
+		}
+	}, 200);
 </script>
 
 <svelte:window
@@ -22,11 +29,6 @@
 					PLAYER_CELL[1] += $BLOCK_SIZE;
 				}
 				break;
-			case 'ArrowUp':
-				if ($grid[PLAYER_GRID_INDEX[0] - 1][PLAYER_GRID_INDEX[1]] === 'SKY') {
-					PLAYER_CELL[0] -= $BLOCK_SIZE;
-				}
-				break;
 			case 'ArrowDown':
 				if ($grid[PLAYER_GRID_INDEX[0] + 1][PLAYER_GRID_INDEX[1]] === 'SKY') {
 					PLAYER_CELL[0] += $BLOCK_SIZE;
@@ -35,14 +37,16 @@
 			case ' ':
 				PLAYER_CELL[0] -= $BLOCK_SIZE;
 				setTimeout(() => {
-					PLAYER_CELL[0] += $BLOCK_SIZE;
-				}, 100);
+					if ($grid[PLAYER_GRID_INDEX[0] + 1][PLAYER_GRID_INDEX[1]] === 'SKY') {
+						PLAYER_CELL[0] += $BLOCK_SIZE;
+					}
+				}, 1000);
 				break;
 		}
 	}}
 />
 <div
 	id="PLAYER-{69 * 420}"
-	style="top : {PLAYER_CELL[0]}px; left : {PLAYER_CELL[1]}px; width: {$BLOCK_SIZE}px; height: {$BLOCK_SIZE}px; background : {COLOR} "
-	class="absolute w-[60px] h-[{$BLOCK_SIZE}px] rounded-md z-50 border-[1px] border-black"
+	style="top : {PLAYER_CELL[0]}px; left : {PLAYER_CELL[1]}px; width: {$BLOCK_SIZE}px; height: {$BLOCK_SIZE}px;"
+	class="absolute w-[60px] h-[{$BLOCK_SIZE}px] rounded-md bg-white z-50 border-[1px] border-black"
 />
